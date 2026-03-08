@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import expressLayouts from "express-ejs-layouts";
+import cors from "cors";
 
 import path from "path";
 import routes from "./routes";
@@ -7,6 +8,17 @@ import swaggerJsDocs from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 const app: Application = express();
 const PORT: number = parseInt(<string>process.env.PORT, 10) || 3000;
+
+app.use(
+  cors({
+    origin: [
+      process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : `http://localhost:${PORT}`,
+    ],
+    credentials: true,
+  }),
+);
 
 const swaggerOptions = {
   definition: {

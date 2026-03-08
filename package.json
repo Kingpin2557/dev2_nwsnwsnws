@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Kingpin2557/dev2_nwsnwsnws#readme",
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "ejs": "^5.0.1",
     "express": "^5.2.1",
@@ -27,6 +28,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.6",
     "@types/express-ejs-layouts": "^2.5.4",
