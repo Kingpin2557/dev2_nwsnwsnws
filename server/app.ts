@@ -24,7 +24,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ["./routes.{ts,js}", "./dist/routes.js", "./api/routes.js"],
+  apis: [path.join(__dirname, "routes.*")],
 };
 
 const CSS_URL =
@@ -41,6 +41,9 @@ app.use(
   swaggerUi.setup(specs, {
     customCssUrl: CSS_URL,
     customJs: JS_URLS,
+    swaggerOptions: {
+      persistAuthorization: true,
+    },
   }),
 );
 
