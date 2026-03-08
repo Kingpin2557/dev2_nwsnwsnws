@@ -53,6 +53,11 @@ router.get("/", (_req: Request, res: Response): void => {
  */
 router.get("/article/:slug", (req: Request, res: Response): void => {
   const article = getNewsBySlug(req.params.slug as string);
+
+  if (!article) {
+    return res.status(404).render("404", { title: "Pagina niet gevonden" });
+  }
+
   res.render("article", { title: "Article", article: article });
 });
 
@@ -105,12 +110,19 @@ router.get("/add-article", (_req, res) => {
  *       302:
  *         description: Redirects to the news list
  */
-
 router.post("/add-news", (req, res) => {
   const { title, content, date } = req.body;
 
   addNews({ title, content, date });
   res.redirect("/");
+});
+
+router.use((req, res) => {
+  res.status(404).render("404", {
+    title: "Page Not Found",
+    // Since you use express-layouts, this will render inside layouts/main
+    layout: "layouts/main",
+  });
 });
 
 export default router;

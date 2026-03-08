@@ -4,7 +4,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     background-color: hsl(60, 14%, 89%);
 }
@@ -13,6 +13,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    margin-block: 1rem;
 }
 
 a {
@@ -89,4 +91,82 @@ form select:focus {
     outline: none;
     border-color: hsl(0, 0%, 40%);
     box-shadow: 0 0 0 3px hsla(0, 0%, 40%, 0.1);
+}
+
+.error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 2rem;
+    background-color: hsl(60, 14%, 89%);
+    gap: 4rem;
+}
+
+.error-content {
+    text-align: center;
+    max-width: 500px;
+}
+
+.error-number {
+    font-size: 6rem;
+    font-weight: 900;
+    color: hsl(0, 0%, 30%);
+    margin: 0 0 1rem 0;
+    line-height: 1;
+}
+
+.error-title {
+    font-size: 2rem;
+    color: hsl(0, 0%, 20%);
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+}
+
+.error-message {
+    font-size: 1.25rem;
+    color: hsl(0, 0%, 40%);
+    margin: 0 0 2rem 0;
+    line-height: 1.5;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 200px;
+}
+
+.btn-primary {
+    background-color: hsl(60, 22%, 80%);
+    color: hsl(0, 0%, 20%);
+}
+
+.btn-primary:hover {
+    background-color: hsl(60, 22%, 70%);
+}
+
+.btn-secondary {
+    background-color: hsl(60, 22%, 93%);
+    color: hsl(0, 0%, 20%);
+    border: 1px solid hsl(60, 22%, 80%);
+}
+
+.btn-secondary:hover {
+    background-color: hsl(60, 22%, 85%);
 }
