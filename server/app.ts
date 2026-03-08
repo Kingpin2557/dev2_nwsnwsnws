@@ -24,7 +24,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: [path.join(__dirname, "routes.ts")],
+  apis: ["./routes.{ts,js}", "./dist/routes.js", "./api/routes.js"],
 };
 
 const CSS_URL =
