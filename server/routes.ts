@@ -111,6 +111,7 @@ router.get("/add-article", (_req, res) => {
  *         description: Redirects to the news list
  */
 router.post("/add-news", (req, res) => {
+  console.log("DEBUG POST /add-news req.body:", req.body);
   const { title, content, date } = req.body;
 
   addNews({ title, content, date });
