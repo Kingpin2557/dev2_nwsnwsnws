@@ -1,0 +1,14 @@
+<section>
+    <% news.forEach(function(article) { %>
+        <article class="articles">
+            <a href="/article/<%= article.slug %>">
+                <p><%= article.date %></p>
+
+                <h3><%= article.title %></h3>
+                <p><%= article.content %></p>
+            </a>
+        </article>
+    <% }); %>
+</section>
+
+<a class="add" href="/add-article">Add an article</a>

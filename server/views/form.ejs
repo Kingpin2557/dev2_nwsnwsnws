@@ -1,0 +1,18 @@
+<form action="/add-news" method="POST">
+  <div>
+    <label for="title"><%= title %></label>
+    <input type="text" id="title" name="title" required>
+  </div>
+
+  <div>
+    <label for="content"><%= inhoud %></label>
+    <textarea id="content" name="content" required></textarea>
+  </div>
+
+  <div>
+    <label for="date"><%= datum %></label>
+    <input type="date" id="date" name="date" required>
+  </div>
+
+  <button class="add" type="submit"><%= button %></button>
+</form>
