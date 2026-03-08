@@ -7,7 +7,7 @@ export interface News {
   slug: string;
   title: string;
   content: string;
-  date: string; 
+  date: string;
 }
 
 /**
@@ -31,7 +31,7 @@ export const getNewsBySlug = (slug: string): News | undefined => {
  */
 export const addNews = (newArticle: Omit<News, "slug">): News => {
   const news = getNews();
-  const slug:string = newArticle.title.toLowerCase().replace(/\s/g, "-");
+  const slug: string = newArticle.title.toLowerCase().replace(/\s/g, "-");
   const articleWithSlug: News = { slug: slug, ...newArticle };
 
   news.push(articleWithSlug);
