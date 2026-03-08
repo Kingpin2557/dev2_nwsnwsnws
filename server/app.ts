@@ -6,7 +6,7 @@ import routes from "./routes";
 import swaggerJsDocs from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 const app: Application = express();
-const PORT: number = 3000;
+const PORT: number = parseInt(<string>process.env.PORT, 10) || 3000;
 
 const swaggerOptions = {
   definition: {
