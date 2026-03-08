@@ -8,9 +8,6 @@ import swaggerUi from "swagger-ui-express";
 const app: Application = express();
 const PORT: number = parseInt(<string>process.env.PORT, 10) || 3000;
 
-const CSS_URL =
-  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css";
-
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -28,11 +25,21 @@ const swaggerOptions = {
   apis: [path.join(__dirname, "routes.ts")],
 };
 
+const CSS_URL =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css";
+const JS_URLS = [
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.js",
+];
+
 const specs = swaggerJsDocs(swaggerOptions);
 app.use(
   "/api-docs",
   swaggerUi.serve,
-  swaggerUi.setup(specs, { customCssUrl: CSS_URL }),
+  swaggerUi.setup(specs, {
+    customCssUrl: CSS_URL,
+    customJs: JS_URLS,
+  }),
 );
 
 app.set("view engine", "ejs");
