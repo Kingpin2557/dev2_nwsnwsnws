@@ -7,6 +7,8 @@ const router = express.Router();
  * @openapi
  * /:
  *   get:
+ *     tags:
+ *       - News - Read Operations
  *     summary: Get all news articles (HTML)
  *     responses:
  *       200:
@@ -25,6 +27,8 @@ router.get("/", (_req: Request, res: Response): void => {
  * @openapi
  * /article/{slug}:
  *   get:
+ *     tags:
+ *       - News - Read Operations
  *     summary: Get a specific news article by slug (HTML)
  *     parameters:
  *       - in: path
@@ -56,6 +60,8 @@ router.get("/article/:slug", (req: Request, res: Response): void => {
  * @openapi
  * /add-article:
  *   get:
+ *     tags:
+ *       - News - Read Operations
  *     summary: Render the form to add a new article (HTML)
  *     responses:
  *       200:
@@ -78,6 +84,8 @@ router.get("/add-article", (_req, res) => {
  * @openapi
  * /add-news:
  *   post:
+ *     tags:
+ *       - News - Write Operations
  *     summary: Add a news article (HTML)
  *     requestBody:
  *       required: true
