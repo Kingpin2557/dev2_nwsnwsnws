@@ -118,10 +118,9 @@ router.post("/add-news", (req, res) => {
   res.redirect("/");
 });
 
-router.use((req, res) => {
+router.use((_req, res) => {
   res.status(404).render("404", {
     title: "Page Not Found",
-    // Since you use express-layouts, this will render inside layouts/main
     layout: "layouts/main",
   });
 });
