@@ -1,8 +1,10 @@
 <article class="news-article">
+    <div class="news-article__header">
+        <a class="add" href="/">← Back to Home</a>
+        <time datetime="<%= article.date %>"><%= new Date(article.date).toLocaleDateString('nl-NL') %></time>
+    </div>
   <header>
-    <a class="add" href="/">← Back to Home</a>
     <h1><%= article.title %></h1>
-    <time datetime="<%= article.date %>"><%= new Date(article.date).toLocaleDateString('nl-NL') %></time>
   </header>
   <div class="content">
     <p><%= article.content %></p>

@@ -17,7 +17,7 @@ main {
     margin-block: 1rem;
 }
 
-header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,6 +54,11 @@ section {
     transition: background-color 0.3s ease-in;
 }
 
+.news-article__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .articles:hover {
     background-color: hsl(60, 22%, 60%);
 }
