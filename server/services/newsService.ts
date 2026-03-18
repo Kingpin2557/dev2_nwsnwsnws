@@ -1,41 +1,42 @@
-import fs from "fs";
-import path from "path";
+// Importeer sql uit db.ts
+import sql from "./db";
 
-const filePath = path.join(__dirname, "../data/news.json");
-
+// Interface voor een nieuwsartikel
 export interface News {
+  id: number;
   slug: string;
   title: string;
-  content: string;
-  date: string;
+  content?: string;
+  image?: string;
+  created_at?: string;
 }
 
-/**
- * Leest het JSON-bestand en geeft alle nieuwsartikelen terug.
- */
-export const getNews = (): News[] => {
-  const jsonData = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(jsonData) as News[];
-};
+// Alle nieuwsartikelen ophalen
+export async function getNews(): Promise<News[]> {
+  const data: News[] = await sql`select * from articles`;
+  return data;
+}
 
 /**
  * Zoekt een nieuwsartikel op basis van de slug.
  */
-export const getNewsBySlug = (slug: string): News | undefined => {
-  const news = getNews();
-  return news.find((article) => article.slug === slug);
-};
+export async function getNewsBySlug(slug: string): Promise<News | null> {
+  const data: News[] = await sql`select * FROM articles WHERE slug = ${slug}`;
 
-/**
- * Voegt een nieuw nieuwsartikel toe aan het JSON-bestand.
- */
-export const addNews = (newArticle: Omit<News, "slug">): News => {
-  const news = getNews();
-  const slug: string = newArticle.title.toLowerCase().replace(/\s/g, "-");
-  const articleWithSlug: News = { slug: slug, ...newArticle };
+  console.log(data);
+  return data[0];
+}
 
-  news.push(articleWithSlug);
-  fs.writeFileSync(filePath, JSON.stringify(news, null, 2), "utf-8");
+// /**
+//  * Voegt een nieuw nieuwsartikel toe aan het JSON-bestand.
+//  */
+// export const addNews = (newArticle: Omit<News, "slug">): News => {
+//   const news = getNews();
+// const slug: string = newArticle.title.toLowerCase().replace(/\s/g, "-");
+//   const articleWithSlug: News = { slug: slug, ...newArticle };
 
-  return articleWithSlug;
-};
+//   news.push(articleWithSlug);
+//   fs.writeFileSync(filePath, JSON.stringify(news, null, 2), "utf-8");
+
+//   return articleWithSlug;
+// };

@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { getNews, getNewsBySlug, addNews } from "./services/newsService";
-
+import { getNews, getNewsBySlug } from "./services/newsService";
+// , addNews
 const router = express.Router();
 
 /**
@@ -18,8 +18,10 @@ const router = express.Router();
  *             schema:
  *               type: string
  */
-router.get("/", (_req: Request, res: Response): void => {
-  const news = getNews();
+
+router.get("/", async (req: Request, res: Response): Promise<void> => {
+  const news = await getNews();
+  console.log(news);
   res.render("news", { title: "News", news: news });
 });
 
@@ -51,15 +53,18 @@ router.get("/", (_req: Request, res: Response): void => {
  *             schema:
  *               type: string
  */
-router.get("/article/:slug", (req: Request, res: Response): void => {
-  const article = getNewsBySlug(req.params.slug as string);
+router.get(
+  "/article/:slug",
+  async (req: Request, res: Response): Promise<void> => {
+    const article = await getNewsBySlug(req.params.slug as string);
 
-  if (!article) {
-    return res.status(404).render("404", { title: "Pagina niet gevonden" });
-  }
+    if (!article) {
+      return res.status(404).render("404", { title: "Pagina niet gevonden" });
+    }
 
-  res.render("article", { title: "Article", article: article });
-});
+    res.render("article", { title: "Article", article: article });
+  },
+);
 
 /**
  * @openapi
@@ -110,13 +115,13 @@ router.get("/add-article", (_req, res) => {
  *       302:
  *         description: Redirects to the news list
  */
-router.post("/add-news", (req, res) => {
-  console.log("DEBUG POST /add-news req.body:", req.body);
-  const { title, content, date } = req.body;
+// router.post("/add-news", (req, res) => {
+//   console.log("DEBUG POST /add-news req.body:", req.body);
+//   const { title, content, date } = req.body;
 
-  addNews({ title, content, date });
-  res.redirect("/");
-});
+//   addNews({ title, content, date });
+//   res.redirect("/");
+// });
 
 router.use((_req, res) => {
   res.status(404).render("404", {
