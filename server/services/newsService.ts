@@ -1,7 +1,5 @@
-// Importeer sql uit db.ts
-import sql from "./db";
+import { articleQueries } from "./queries";
 
-// Interface voor een nieuwsartikel
 export interface News {
   id: number;
   slug: string;
@@ -11,9 +9,9 @@ export interface News {
   created_at?: string;
 }
 
-// Alle nieuwsartikelen ophalen
 export async function getNews(): Promise<News[]> {
-  const data: News[] = await sql`select * from articles`;
+  const data: News[] = await articleQueries.getAll();
+
   return data;
 }
 
@@ -21,22 +19,17 @@ export async function getNews(): Promise<News[]> {
  * Zoekt een nieuwsartikel op basis van de slug.
  */
 export async function getNewsBySlug(slug: string): Promise<News | null> {
-  const data: News[] = await sql`select * FROM articles WHERE slug = ${slug}`;
+  const data: News[] = await articleQueries.getBySlug(slug);
 
-  console.log(data);
   return data[0];
 }
 
-// /**
-//  * Voegt een nieuw nieuwsartikel toe aan het JSON-bestand.
-//  */
-// export const addNews = (newArticle: Omit<News, "slug">): News => {
-//   const news = getNews();
-// const slug: string = newArticle.title.toLowerCase().replace(/\s/g, "-");
-//   const articleWithSlug: News = { slug: slug, ...newArticle };
+/**
+ * Voegt een nieuw nieuwsartikel toe aan het JSON-bestand.
+ */
+export const addNews = (newArticle: Omit<News, "slug">): News => {
+  const slug: string = newArticle.title.toLowerCase().replace(/\s/g, "-");
+  const articleWithSlug: News = { slug: slug, ...newArticle };
 
-//   news.push(articleWithSlug);
-//   fs.writeFileSync(filePath, JSON.stringify(news, null, 2), "utf-8");
-
-//   return articleWithSlug;
-// };
+  return articleWithSlug;
+};

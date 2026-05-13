@@ -21,7 +21,6 @@ const router = express.Router();
 
 router.get("/", async (req: Request, res: Response): Promise<void> => {
   const news = await getNews();
-  console.log(news);
   res.render("news", { title: "News", news: news });
 });
 
